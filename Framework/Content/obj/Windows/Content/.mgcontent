@@ -4,10 +4,16 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/jpp.jpg</File>
-    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/templier.jpg</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Fonts/Pixeled10.spritefont</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/background.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/friend.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/ground.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/player.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

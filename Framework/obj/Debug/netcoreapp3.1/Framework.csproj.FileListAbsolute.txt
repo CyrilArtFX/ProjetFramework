@@ -34,5 +34,8 @@ C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\obj\Debug\netcoreapp3.1
 C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\obj\Debug\netcoreapp3.1\Framework.dll
 C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\obj\Debug\netcoreapp3.1\Framework.pdb
 C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\obj\Debug\netcoreapp3.1\Framework.genruntimeconfig.cache
-C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\jpp.xnb
-C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\templier.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\background.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\friend.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\player.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\ground.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Fonts\Pixeled10.xnb
