@@ -9,8 +9,10 @@
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFrameWork/Framework/Content/Sprites/friend.png</File>
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFrameWork/Framework/Content/Sprites/ground.png</File>
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFrameWork/Framework/Content/Sprites/player.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFrameWork/Framework/Content/Sprites/warp.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

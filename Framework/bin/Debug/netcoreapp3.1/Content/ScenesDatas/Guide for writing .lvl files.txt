@@ -1,0 +1,21 @@
+-> Set the background :
+background;pathToTheTexture2Dfile
+
+-> Set the ground :
+ground;pathToTheTexture2Dfile
+
+-> Set the player :
+player;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;speed
+OR
+player;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY;speed
+>Use the ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY; version if you want to resize the colliderBox of the sprite (the default size is the size of the sprite)
+
+-> Set a sprite :
+sprite;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered
+OR
+sprite;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY
+
+-> Set a warp:
+warp;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered
+OR
+warp;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY

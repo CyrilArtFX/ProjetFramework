@@ -27,6 +27,20 @@ namespace Framework
             this.colliderBoxAdjustments = colliderBoxAdjustments;
         }
 
+        public Sprite(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered)
+        {
+            texture = baseTexture;
+            position = basePosition;
+            size = baseSize;
+            if (isCentered)
+            {
+                centerOffsetX = size.X / 2;
+                centerOffsetY = size.Y;
+            }
+
+            colliderBoxAdjustments = new Rectangle(0, 0, (int)(size.X), (int)(size.Y));
+        }
+
 
         public bool Intersects(Sprite otherSprite)
         {

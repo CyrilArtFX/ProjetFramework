@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Framework
@@ -41,9 +42,12 @@ namespace Framework
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scenes.Add("level00" ,new Scene(Content.Load<Texture2D>("Sprites/background"), Content.Load<Texture2D>("Sprites/ground"), graphicsDevice));
-            scenes["level00"].AddSprite("player", new SpriteControlled(Content.Load<Texture2D>("Sprites/player"), new Vector2(300, 405), new Vector2(64, 64), true, new Rectangle(20, 15, 23, 47), 5));
-            scenes["level00"].AddSprite("friend", new Sprite(Content.Load<Texture2D>("Sprites/friend"), new Vector2(400, 405), new Vector2(64, 64), true, new Rectangle(21, 15, 23, 47)));
+            scenes.Add("level00", new Scene(graphicsDevice, "Content/ScenesDatas/scene00.lvl", GetContent));
+            scenes.Add("level01", new Scene(graphicsDevice, "Content/ScenesDatas/scene01.lvl", GetContent));
+
+            foreach(var scene in scenes)
+                scene.Value.InitializeDatas(GetContent, scenes);
+
             currentScene = scenes["level00"];
 
             pixeled10 = Content.Load<SpriteFont>("Fonts/Pixeled10");
@@ -56,7 +60,7 @@ namespace Framework
 
             if (IsActive)
             {
-                currentScene.Update();
+                currentScene.Update(ChangeScene);
             }
 
 
@@ -73,5 +77,17 @@ namespace Framework
             base.Draw(gameTime);
         }
 
+
+        public void ChangeScene(Scene newScene, int xPositionToTeleportPlayer)
+        {
+            currentScene = newScene;
+            currentScene.player.position.X = xPositionToTeleportPlayer;
+            currentScene.player.isMoving = false;
+        }
+
+        public Texture2D GetContent(string path)
+        {
+            return Content.Load<Texture2D>(path);
+        }
     }
 }

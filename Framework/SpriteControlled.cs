@@ -7,9 +7,15 @@ namespace Framework
     {
         private float speed;
         private float goalPositionX;
-        private bool isMoving;
+        public bool isMoving;
 
         public SpriteControlled(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Rectangle colliderBoxAdjustments, float baseSpeed) : base(baseTexture, basePosition, baseSize, isCentered, colliderBoxAdjustments)
+        {
+            isMoving = false;
+            speed = baseSpeed;
+        }
+
+        public SpriteControlled(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, float baseSpeed) : base(baseTexture, basePosition, baseSize, isCentered)
         {
             isMoving = false;
             speed = baseSpeed;

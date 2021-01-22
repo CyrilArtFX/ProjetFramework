@@ -1,0 +1,6 @@
+background;Sprites/background
+ground;Sprites/ground
+player;Sprites/player;500;405;64;64;true;ColliderBox;20;15;23;47;5
+sprite;Sprites/friend;300;405;64;64;true;ColliderBox;21;15;23;47;coupaing1
+sprite;Sprites/friend;650;405;64;64;true;ColliderBox;21;15;23;47;coupaing2
+warp;Sprites/warp;100;405;100;100;true;level00;300;warpToLevel00

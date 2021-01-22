@@ -1,0 +1,1 @@
+Scenes datas files are located in Framework/bin/Debug/netcoreapp3.1/Content/ScenesDatas
