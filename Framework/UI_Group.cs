@@ -1,0 +1,48 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+
+namespace Framework
+{
+    public class UI_Group
+    {
+        private bool isVisible = true;
+        private IDictionary<string, UI_Element> elements = new Dictionary<string, UI_Element>();
+
+        public UI_Group()
+        {
+
+        }
+
+        public void Update()
+        {
+            foreach(var element in elements)
+            {
+                element.Value.Update();
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if(isVisible)
+            {
+                foreach(var element in elements)
+                {
+                    element.Value.Draw(spriteBatch);
+                }
+            }   
+        }
+
+        public void AddElement(string name, UI_Element element)
+        {
+            elements.Add(name, element);
+        }
+
+        public void ChangeVisibility(bool newVisibility)
+        {
+            isVisible = newVisibility;
+        }
+    }
+}

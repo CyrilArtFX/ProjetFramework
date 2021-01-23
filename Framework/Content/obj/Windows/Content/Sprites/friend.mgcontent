@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/cyril/OneDrive/Bureau/ProjetFrameWork/Framework/Content/Sprites/friend.png</SourceFile>
+  <SourceFile>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/friend.png</SourceFile>
   <SourceTime>2021-01-18T15:17:13.9719469+01:00</SourceTime>
-  <DestFile>C:/Users/cyril/OneDrive/Bureau/ProjetFrameWork/Framework/Content/bin/Windows/Content/Sprites/friend.xnb</DestFile>
-  <DestTime>2021-01-22T14:48:27.019906+01:00</DestTime>
+  <DestFile>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/bin/Windows/Content/Sprites/friend.xnb</DestFile>
+  <DestTime>2021-01-23T22:40:56.5809873+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

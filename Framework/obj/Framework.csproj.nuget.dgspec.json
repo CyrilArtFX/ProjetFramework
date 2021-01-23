@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFrameWork\\Framework\\Framework.csproj": {}
+    "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFramework\\Framework\\Framework.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFrameWork\\Framework\\Framework.csproj": {
+    "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFramework\\Framework\\Framework.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFrameWork\\Framework\\Framework.csproj",
+        "projectUniqueName": "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFramework\\Framework\\Framework.csproj",
         "projectName": "Framework",
-        "projectPath": "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFrameWork\\Framework\\Framework.csproj",
+        "projectPath": "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFramework\\Framework\\Framework.csproj",
         "packagesPath": "C:\\Users\\cyril\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFrameWork\\Framework\\obj\\",
+        "outputPath": "C:\\Users\\cyril\\OneDrive\\Bureau\\ProjetFramework\\Framework\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

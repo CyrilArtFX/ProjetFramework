@@ -12,15 +12,17 @@ namespace Framework
         private IDictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
         private IDictionary<string, Warp> warps = new Dictionary<string, Warp>();
         public SpriteControlled player;
+        private UI_Group ui;
 
         private Texture2D backgroundTex;
         private Texture2D groundTex;
         private int screenSizeX;
         private int screenSizeY;
+        private GraphicsDevice graphicsDevice;
 
-        public Vector2 mousePosition;
-        public bool mouseLeftClick = false;
-        public bool mouseLeftPress = false;
+        private Vector2 mousePosition;
+        private bool mouseLeftClick = false;
+        private bool mouseLeftPress = false;
 
         private string[] datas;
 
@@ -29,6 +31,9 @@ namespace Framework
         {
             screenSizeX = graphicsDevice.Viewport.Width;
             screenSizeY = graphicsDevice.Viewport.Height;
+            this.graphicsDevice = graphicsDevice;
+
+            ui = new UI_Group();
 
             datas = File.ReadAllLines(datasFilePath);
         }
@@ -39,6 +44,7 @@ namespace Framework
                 player.MoveTo(mousePosition.X);
 
             player.Update();
+            if (ui != null) ui.Update();
 
             foreach (var warp in warps)
                 if (player.Intersects(warp.Value))
@@ -69,6 +75,7 @@ namespace Framework
             foreach (var warp in warps)
                 warp.Value.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            if(ui != null) ui.Draw(spriteBatch);
         }
 
         public void InitializeDatas(Func<string, Texture2D> GetContent, IDictionary<string, Scene> listOfScenes)
@@ -109,6 +116,11 @@ namespace Framework
                         warps.Add(cells[14], new Warp(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), listOfScenes[cells[12]], int.Parse(cells[13])));
                     else
                         warps.Add(cells[9], new Warp(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), listOfScenes[cells[7]], int.Parse(cells[8])));
+                }
+
+                else if (cells[0] == "panel")
+                {
+                   ui.AddElement("panel", new UI_Panel(new Vector2(float.Parse(cells[1]), float.Parse(cells[2])), new Vector2(float.Parse(cells[3]), float.Parse(cells[4])), graphicsDevice));
                 }
             }
         }
