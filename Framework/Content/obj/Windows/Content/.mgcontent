@@ -5,13 +5,19 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Fonts/Pixeled10.spritefont</File>
-    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/background.png</File>
-    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/friend.png</File>
-    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/ground.png</File>
-    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/player.png</File>
-    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/warp.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/OtherSprites/friend.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/OtherSprites/player.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/OtherSprites/warp.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/ScenesImages/background.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/ScenesImages/ground.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/UI/buttonClicked.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/UI/buttonHover.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/UI/buttonIdle.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

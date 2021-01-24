@@ -41,7 +41,8 @@ namespace Framework
         public void Update(Action<Scene, int> ChangeScene)
         {
             if(mouseLeftClick)
-                player.MoveTo(mousePosition.X);
+                if(!ui.isOneElementHover)
+                    player.MoveTo(mousePosition.X);
 
             player.Update();
             if (ui != null) ui.Update();
@@ -120,7 +121,12 @@ namespace Framework
 
                 else if (cells[0] == "panel")
                 {
-                   ui.AddElement("panel", new UI_Panel(new Vector2(float.Parse(cells[1]), float.Parse(cells[2])), new Vector2(float.Parse(cells[3]), float.Parse(cells[4])), graphicsDevice));
+                   ui.AddElement(cells[5], new UI_Panel(new Vector2(float.Parse(cells[1]), float.Parse(cells[2])), new Vector2(float.Parse(cells[3]), float.Parse(cells[4])), graphicsDevice));
+                }
+
+                else if (cells[0] == "button")
+                {
+                    ui.AddElement(cells[5], new UI_Button(new Vector2(float.Parse(cells[1]), float.Parse(cells[2])), new Vector2(float.Parse(cells[3]), float.Parse(cells[4])), graphicsDevice, GetContent(cells[6]), GetContent(cells[7]), GetContent(cells[8])));
                 }
             }
         }

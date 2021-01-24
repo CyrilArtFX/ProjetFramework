@@ -8,6 +8,8 @@ namespace Framework
 {
     public class UI_Group
     {
+        public bool isOneElementHover;
+
         private bool isVisible = true;
         private IDictionary<string, UI_Element> elements = new Dictionary<string, UI_Element>();
 
@@ -18,9 +20,11 @@ namespace Framework
 
         public void Update()
         {
+            isOneElementHover = false;
             foreach(var element in elements)
             {
                 element.Value.Update();
+                if (element.Value.isHover) isOneElementHover = true;
             }
         }
 

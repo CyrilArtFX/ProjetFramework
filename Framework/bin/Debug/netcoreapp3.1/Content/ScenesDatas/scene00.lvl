@@ -1,6 +1,7 @@
-background;Sprites/background
-ground;Sprites/ground
-player;Sprites/player;300;405;64;64;true;ColliderBox;20;15;23;47;5
-sprite;Sprites/friend;400;405;64;64;true;ColliderBox;21;15;23;47;coupaing
-warp;Sprites/warp;550;405;100;100;true;level01;500;warpToLevel01
-panel;25;25;750;150
+background;Sprites/ScenesImages/background
+ground;Sprites/ScenesImages/ground
+player;Sprites/OtherSprites/player;300;405;64;64;true;ColliderBox;20;15;23;47;5
+sprite;Sprites/OtherSprites/friend;400;405;64;64;true;ColliderBox;21;15;23;47;coupaing
+warp;Sprites/OtherSprites/warp;550;405;100;100;true;level01;500;warpToLevel01
+panel;25;25;750;150;largePanel
+button;25;200;50;50;testButton;Sprites/UI/buttonIdle;Sprites/UI/buttonHover;Sprites/UI/buttonClicked
