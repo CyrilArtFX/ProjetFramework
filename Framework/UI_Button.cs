@@ -18,8 +18,12 @@ namespace Framework
 
         public bool isClick = false;
 
-        public UI_Button(Vector2 position, Vector2 size, GraphicsDevice graphicsDevice, Texture2D spriteIdle, Texture2D spriteHover, Texture2D spriteClicked) : base(position, size, graphicsDevice)
+        private Action<Message> sendMessage;
+
+        public UI_Button(Vector2 position, Vector2 size, GraphicsDevice graphicsDevice, Texture2D spriteIdle, Texture2D spriteHover, Texture2D spriteClicked, Action<Message> sendMessage) : base(position, size, graphicsDevice)
         {
+            this.sendMessage = sendMessage;
+
             this.spriteIdle = spriteIdle;
             this.spriteHover = spriteHover;
             this.spriteClicked = spriteClicked;
@@ -79,6 +83,7 @@ namespace Framework
         public void OnClick()
         {
             currentSprite = spriteClicked;
+            sendMessage(new Message(Message.MessageType.changeState, "pause"));
         }
 
         public void OnRelease()

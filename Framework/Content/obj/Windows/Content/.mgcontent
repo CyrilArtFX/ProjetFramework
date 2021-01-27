@@ -10,11 +10,15 @@
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/OtherSprites/warp.png</File>
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/ScenesImages/background.png</File>
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/ScenesImages/ground.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/States/base.png</File>
+    <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/States/pause.png</File>
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/UI/buttonClicked.png</File>
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/UI/buttonHover.png</File>
     <File>C:/Users/cyril/OneDrive/Bureau/ProjetFramework/Framework/Content/Sprites/UI/buttonIdle.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

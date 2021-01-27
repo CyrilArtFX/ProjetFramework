@@ -17,6 +17,7 @@ namespace Framework
 
         public IDictionary<string, Scene> scenes = new Dictionary<string, Scene>();
         public Scene currentScene;
+        public IDictionary<string, SpritePickable> inventory = new Dictionary<string, SpritePickable>();
 
         private SpriteFont pixeled10;
 
@@ -31,6 +32,9 @@ namespace Framework
         protected override void Initialize()
         {
             graphicsDevice = this.GraphicsDevice;
+            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 500;
+            _graphics.ApplyChanges();
             screenSizeX = graphicsDevice.Viewport.Width;
             screenSizeY = graphicsDevice.Viewport.Height;
 
@@ -42,8 +46,8 @@ namespace Framework
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scenes.Add("level00", new Scene(graphicsDevice, "Content/ScenesDatas/scene00.lvl", GetContent));
-            scenes.Add("level01", new Scene(graphicsDevice, "Content/ScenesDatas/scene01.lvl", GetContent));
+            scenes.Add("level00", new Scene(graphicsDevice, "Content/ScenesDatas/scene00.lvl", GetContent, inventory));
+            scenes.Add("level01", new Scene(graphicsDevice, "Content/ScenesDatas/scene01.lvl", GetContent, inventory));
 
             foreach(var scene in scenes)
                 scene.Value.InitializeDatas(GetContent, scenes);
