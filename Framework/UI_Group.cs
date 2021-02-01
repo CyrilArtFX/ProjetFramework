@@ -11,7 +11,7 @@ namespace Framework
         public bool isOneElementHover;
 
         private bool isVisible = true;
-        private IDictionary<string, UI_Element> elements = new Dictionary<string, UI_Element>();
+        public IDictionary<string, UI_Element> elements = new Dictionary<string, UI_Element>();
 
         public UI_Group()
         {
@@ -42,6 +42,11 @@ namespace Framework
         public void AddElement(string name, UI_Element element)
         {
             elements.Add(name, element);
+        }
+
+        public void RemoveElement(string name)
+        {
+            elements.Remove(name);
         }
 
         public void ChangeVisibility(bool newVisibility)

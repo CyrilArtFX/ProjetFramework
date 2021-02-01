@@ -8,7 +8,9 @@ namespace Framework
     {
         public enum MessageType
         {
-            changeState
+            changeState,
+            inventoryElementClicked,
+            noType
         }
 
         public MessageType type;

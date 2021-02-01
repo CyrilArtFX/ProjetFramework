@@ -53,3 +53,4 @@ C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1
 C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\UI\buttonIdle.xnb
 C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\States\base.xnb
 C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\States\pause.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Pickables\heart.xnb

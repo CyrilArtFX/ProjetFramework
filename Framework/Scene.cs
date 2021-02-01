@@ -12,7 +12,7 @@ namespace Framework
         private IDictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
         private IDictionary<string, Warp> warps = new Dictionary<string, Warp>();
         public SpriteControlled player;
-        private UI_Group ui;
+        public UI_Group ui;
         private IDictionary<string, SpritePickable> pickables = new Dictionary<string, SpritePickable>();
 
         private Texture2D backgroundTex;
@@ -25,7 +25,9 @@ namespace Framework
         private bool mouseLeftClick = false;
         private bool mouseLeftPress = false;
 
-        private IDictionary<string, SpritePickable> inventory = new Dictionary<string, SpritePickable>();
+        public IDictionary<string, SpritePickable> inventory = new Dictionary<string, SpritePickable>();
+        private Action<IDictionary<string, SpritePickable>> ChangeInventory;
+        private Action<string> RemoveFromInventories;
 
         private List<Message> messages = new List<Message>();
         private List<SpriteStateful> observers = new List<SpriteStateful>();
@@ -33,13 +35,15 @@ namespace Framework
         private string[] datas;
 
 
-        public Scene(GraphicsDevice graphicsDevice, string datasFilePath, Func<string, Texture2D> GetContent, IDictionary<string, SpritePickable> inventory)
+        public Scene(GraphicsDevice graphicsDevice, string datasFilePath, IDictionary<string, SpritePickable> inventory, Action<IDictionary<string, SpritePickable>> ChangeInventory, Action<string> RemoveFromInventories)
         {
             screenSizeX = graphicsDevice.Viewport.Width;
             screenSizeY = graphicsDevice.Viewport.Height;
             this.graphicsDevice = graphicsDevice;
 
             this.inventory = inventory;
+            this.ChangeInventory = ChangeInventory;
+            this.RemoveFromInventories = RemoveFromInventories;
             ui = new UI_Group();
 
             datas = File.ReadAllLines(datasFilePath);
@@ -65,8 +69,11 @@ namespace Framework
 
 
             foreach(Message message in messages)
+            {
+                Notify(message);
                 foreach(SpriteStateful observer in observers)
                     observer.Notify(message);
+            }
             messages.Clear();
 
 
@@ -104,10 +111,39 @@ namespace Framework
             messages.Add(message);
         }
 
+        public void Notify(Message message)
+        {
+            if (message.type == Message.MessageType.inventoryElementClicked)
+                RemoveFromInventory(message.content);
+        }
+
         public void AddToInventory(SpritePickable pickable, string pickableName)
         {
-            inventory.Add(pickableName, pickable);
             pickables.Remove(pickableName);
+            inventory.Add(pickableName, pickable);
+            UpdateInventoryUI();
+        }
+
+        public void RemoveFromInventory(string pickableName)
+        {
+            RemoveFromInventories(pickableName);
+            inventory.Remove(pickableName);
+            UpdateInventoryUI();
+        }
+
+        public void UpdateInventoryUI()
+        {
+            foreach (var element in inventory)
+                ui.RemoveElement(element.Key + "Button");
+            int i = 0;
+            foreach (var element in inventory)
+            {
+                List<Message> messagesToSend = element.Value.messagesToSendWhenInInventory;
+                messagesToSend.Add(new Message(Message.MessageType.inventoryElementClicked, element.Key));
+                ui.AddElement(element.Key + "Button", new UI_Button(new Vector2((i * 95) + 10, 10), new Vector2(90, 90), element.Value.texture, element.Value.texture, element.Value.texture, SendMessage, messagesToSend));
+                i++;
+            }
+            ChangeInventory(inventory);
         }
 
         public void InitializeDatas(Func<string, Texture2D> GetContent, IDictionary<string, Scene> listOfScenes)
@@ -128,7 +164,7 @@ namespace Framework
 
                 else if (cells[0] == "player")
                 {
-                    if(cells[7] == "ColliderBox")
+                    if (cells[7] == "ColliderBox")
                         player = new SpriteControlled(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), float.Parse(cells[12]));
                     else
                         player = new SpriteControlled(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), float.Parse(cells[7]));
@@ -152,28 +188,32 @@ namespace Framework
 
                 else if (cells[0] == "panel")
                 {
-                   ui.AddElement(cells[5], new UI_Panel(new Vector2(float.Parse(cells[1]), float.Parse(cells[2])), new Vector2(float.Parse(cells[3]), float.Parse(cells[4])), graphicsDevice));
+                    ui.AddElement(cells[5], new UI_Panel(new Vector2(float.Parse(cells[1]), float.Parse(cells[2])), new Vector2(float.Parse(cells[3]), float.Parse(cells[4])), graphicsDevice));
                 }
 
                 else if (cells[0] == "button")
                 {
-                    ui.AddElement(cells[5], new UI_Button(new Vector2(float.Parse(cells[1]), float.Parse(cells[2])), new Vector2(float.Parse(cells[3]), float.Parse(cells[4])), graphicsDevice, GetContent(cells[6]), GetContent(cells[7]), GetContent(cells[8]), SendMessage));
+                    int numberOfMessages = int.Parse(cells[9]);
+                    List<Message> messagesToSent = new List<Message>();
+                    for (int i = 0; i < numberOfMessages; i++)
+                        messagesToSent.Add(new Message((Message.MessageType)Enum.Parse(typeof(Message.MessageType), cells[10 + i * 2]), cells[11 + i * 2]));
+                    ui.AddElement(cells[5], new UI_Button(new Vector2(float.Parse(cells[1]), float.Parse(cells[2])), new Vector2(float.Parse(cells[3]), float.Parse(cells[4])), GetContent(cells[6]), GetContent(cells[7]), GetContent(cells[8]), SendMessage, messagesToSent));
                 }
 
                 else if (cells[0] == "spriteStateful")
                 {
-                    if(cells[6] == "ColliderBox")
+                    if (cells[6] == "ColliderBox")
                     {
                         int numberOfStates = int.Parse(cells[11]);
                         List<Texture2D> textures = new List<Texture2D>();
                         IDictionary<string, int> states = new Dictionary<string, int>();
-                        for(int i = 0; i < numberOfStates; i++)
+                        for (int i = 0; i < numberOfStates; i++)
                         {
                             textures.Add(GetContent(cells[12 + i]));
                             states.Add(cells[12 + numberOfStates + i], i);
                         }
-                        SpriteStateful spriteStateful = new SpriteStateful(new Vector2(int.Parse(cells[1]), int.Parse(cells[2])), new Vector2(int.Parse(cells[3]), int.Parse(cells[4])), bool.Parse(cells[5]), new Rectangle(int.Parse(cells[7]), int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10])), textures, states, cells[12 + 2*numberOfStates]);
-                        sprites.Add(cells[13 + 2*numberOfStates], spriteStateful);
+                        SpriteStateful spriteStateful = new SpriteStateful(new Vector2(int.Parse(cells[1]), int.Parse(cells[2])), new Vector2(int.Parse(cells[3]), int.Parse(cells[4])), bool.Parse(cells[5]), new Rectangle(int.Parse(cells[7]), int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10])), textures, states, cells[12 + 2 * numberOfStates]);
+                        sprites.Add(cells[13 + 2 * numberOfStates], spriteStateful);
                         observers.Add(spriteStateful);
                     }
                     else
@@ -189,6 +229,26 @@ namespace Framework
                         SpriteStateful spriteStateful = new SpriteStateful(new Vector2(int.Parse(cells[1]), int.Parse(cells[2])), new Vector2(int.Parse(cells[3]), int.Parse(cells[4])), bool.Parse(cells[5]), textures, states, cells[7 + 2 * numberOfStates]);
                         sprites.Add(cells[8 + 2 * numberOfStates], spriteStateful);
                         observers.Add(spriteStateful);
+                    }
+                }
+
+                else if (cells[0] == "spritePickable")
+                {
+                    if (cells[7] == "ColliderBox")
+                    {
+                        int numberOfMessages = int.Parse(cells[13]);
+                        List<Message> messagesToSentWhenInInventory = new List<Message>();
+                        for(int i = 0; i < numberOfMessages; i++)
+                            messagesToSentWhenInInventory.Add(new Message((Message.MessageType)Enum.Parse(typeof(Message.MessageType), cells[14 + i * 2]), cells[15 + i * 2]));
+                        pickables.Add(cells[12], new SpritePickable(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), messagesToSentWhenInInventory));
+                    }
+                    else
+                    {
+                        int numberOfMessages = int.Parse(cells[8]);
+                        List<Message> messagesToSentWhenInInventory = new List<Message>();
+                        for (int i = 0; i < numberOfMessages; i++)
+                            messagesToSentWhenInInventory.Add(new Message((Message.MessageType)Enum.Parse(typeof(Message.MessageType), cells[9 + i * 2]), cells[10 + i * 2]));
+                        pickables.Add(cells[7], new SpritePickable(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), messagesToSentWhenInInventory));
                     }
                 }
             }

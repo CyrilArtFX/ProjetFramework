@@ -10,6 +10,7 @@ namespace Framework
     {
         public Vector2 position;
         public Vector2 size;
+        public Rectangle rectangleToDraw;
 
         public Vector2 mousePosition;
 
@@ -19,10 +20,11 @@ namespace Framework
 
         public IDictionary<string, Action> events = new Dictionary<string, Action>();
 
-        public UI_Element(Vector2 position, Vector2 size, GraphicsDevice graphicsDevice)
+        public UI_Element(Vector2 position, Vector2 size)
         {
             this.position = position;
             this.size = size;
+            rectangleToDraw = new Rectangle((int)(position.X), (int)(position.Y), (int)(size.X), (int)(size.Y));
 
             events.Add("hoverIn", OnHoverIn);
             events.Add("hoverOut", OnHoverOut);

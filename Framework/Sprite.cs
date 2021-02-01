@@ -8,6 +8,8 @@ namespace Framework
         public Texture2D texture;
         public Vector2 position;
         public Vector2 size;
+        public Rectangle rectangleToDraw;
+
         public float centerOffsetX = 0;
         public float centerOffsetY = 0;
 
@@ -18,7 +20,8 @@ namespace Framework
             texture = baseTexture;
             position = basePosition;
             size = baseSize;
-            if(isCentered)
+            rectangleToDraw = new Rectangle((int)(position.X), (int)(position.Y), (int)(size.X), (int)(size.Y));
+            if (isCentered)
             {
                 centerOffsetX = size.X / 2;
                 centerOffsetY = size.Y;
@@ -32,6 +35,7 @@ namespace Framework
             texture = baseTexture;
             position = basePosition;
             size = baseSize;
+            rectangleToDraw = new Rectangle((int)(position.X), (int)(position.Y), (int)(size.X), (int)(size.Y));
             if (isCentered)
             {
                 centerOffsetX = size.X / 2;

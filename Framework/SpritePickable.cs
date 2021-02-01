@@ -8,8 +8,16 @@ namespace Framework
 {
     public class SpritePickable : Sprite
     {
-        public SpritePickable(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Rectangle colliderBoxAdjustments) : base(baseTexture, basePosition, baseSize, isCentered, colliderBoxAdjustments)
+        public List<Message> messagesToSendWhenInInventory = new List<Message>();
+
+        public SpritePickable(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Rectangle colliderBoxAdjustments, List<Message> messagesToSendWhenInInventory) : base(baseTexture, basePosition, baseSize, isCentered, colliderBoxAdjustments)
         {
+            this.messagesToSendWhenInInventory = messagesToSendWhenInInventory;
+        }
+
+        public SpritePickable(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, List<Message> messagesToSendWhenInInventory) : base(baseTexture, basePosition, baseSize, isCentered)
+        {
+            this.messagesToSendWhenInInventory = messagesToSendWhenInInventory;
         }
     }
 }

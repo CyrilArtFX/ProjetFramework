@@ -11,7 +11,7 @@ namespace Framework
         private Texture2D texture;
         private Color color;
 
-        public UI_Panel(Vector2 position, Vector2 size, GraphicsDevice graphicsDevice) : base(position, size, graphicsDevice)
+        public UI_Panel(Vector2 position, Vector2 size, GraphicsDevice graphicsDevice) : base(position, size)
         {
             color = Color.White;
 
@@ -29,7 +29,7 @@ namespace Framework
 
         public override void Draw(SpriteBatch spriteBash)
         {
-            if(isVisible) spriteBash.Draw(texture, position, color);
+            if(isVisible) spriteBash.Draw(texture, rectangleToDraw, color);
         }
 
         public override void OnHoverIn()

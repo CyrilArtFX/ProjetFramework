@@ -46,8 +46,8 @@ namespace Framework
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scenes.Add("level00", new Scene(graphicsDevice, "Content/ScenesDatas/scene00.lvl", GetContent, inventory));
-            scenes.Add("level01", new Scene(graphicsDevice, "Content/ScenesDatas/scene01.lvl", GetContent, inventory));
+            scenes.Add("level00", new Scene(graphicsDevice, "Content/ScenesDatas/scene00.lvl", inventory, ChangeInventory, RemoveFromInventories));
+            scenes.Add("level01", new Scene(graphicsDevice, "Content/ScenesDatas/scene01.lvl", inventory, ChangeInventory, RemoveFromInventories));
 
             foreach(var scene in scenes)
                 scene.Value.InitializeDatas(GetContent, scenes);
@@ -84,9 +84,23 @@ namespace Framework
 
         public void ChangeScene(Scene newScene, int xPositionToTeleportPlayer)
         {
+            inventory = currentScene.inventory;
             currentScene = newScene;
             currentScene.player.position.X = xPositionToTeleportPlayer;
             currentScene.player.isMoving = false;
+            currentScene.inventory = inventory;
+            currentScene.UpdateInventoryUI();
+        }
+
+        public void RemoveFromInventories(string elementName)
+        {
+            foreach(var scene in scenes)
+                scene.Value.ui.RemoveElement(elementName + "Button");
+        }
+
+        public void ChangeInventory(IDictionary<string, SpritePickable> newInventory)
+        {
+            inventory = newInventory;
         }
 
         public Texture2D GetContent(string path)

@@ -19,10 +19,12 @@ namespace Framework
         public bool isClick = false;
 
         private Action<Message> sendMessage;
+        private List<Message> messagesToSend = new List<Message>();
 
-        public UI_Button(Vector2 position, Vector2 size, GraphicsDevice graphicsDevice, Texture2D spriteIdle, Texture2D spriteHover, Texture2D spriteClicked, Action<Message> sendMessage) : base(position, size, graphicsDevice)
+        public UI_Button(Vector2 position, Vector2 size, Texture2D spriteIdle, Texture2D spriteHover, Texture2D spriteClicked, Action<Message> sendMessage, List<Message> messagesToSend) : base(position, size)
         {
             this.sendMessage = sendMessage;
+            this.messagesToSend = messagesToSend;
 
             this.spriteIdle = spriteIdle;
             this.spriteHover = spriteHover;
@@ -67,7 +69,7 @@ namespace Framework
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if(isVisible) spriteBatch.Draw(currentSprite, position, Color.White);
+            if(isVisible) spriteBatch.Draw(currentSprite, rectangleToDraw, Color.White);
         }
 
         public override void OnHoverIn()
@@ -83,7 +85,8 @@ namespace Framework
         public void OnClick()
         {
             currentSprite = spriteClicked;
-            sendMessage(new Message(Message.MessageType.changeState, "pause"));
+            foreach(Message messageToSend in messagesToSend)
+                sendMessage(messageToSend);
         }
 
         public void OnRelease()
