@@ -46,8 +46,8 @@ namespace Framework
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scenes.Add("level00", new Scene(graphicsDevice, "Content/ScenesDatas/scene00.lvl", inventory, ChangeInventory, RemoveFromInventories));
-            scenes.Add("level01", new Scene(graphicsDevice, "Content/ScenesDatas/scene01.lvl", inventory, ChangeInventory, RemoveFromInventories));
+            scenes.Add("level00", new Scene(graphicsDevice, "Content/ScenesDatas/scene00.lvl", inventory, ChangeMainInventory, RemoveFromUIInventories));
+            scenes.Add("level01", new Scene(graphicsDevice, "Content/ScenesDatas/scene01.lvl", inventory, ChangeMainInventory, RemoveFromUIInventories));
 
             foreach(var scene in scenes)
                 scene.Value.InitializeDatas(GetContent, scenes);
@@ -89,16 +89,16 @@ namespace Framework
             currentScene.player.position.X = xPositionToTeleportPlayer;
             currentScene.player.isMoving = false;
             currentScene.inventory = inventory;
-            currentScene.UpdateInventoryUI();
+            currentScene.UpdateUIInventory();
         }
 
-        public void RemoveFromInventories(string elementName)
+        public void RemoveFromUIInventories(string elementButtonName)
         {
             foreach(var scene in scenes)
-                scene.Value.ui.RemoveElement(elementName + "Button");
+                scene.Value.ui.RemoveElement(elementButtonName);
         }
 
-        public void ChangeInventory(IDictionary<string, SpritePickable> newInventory)
+        public void ChangeMainInventory(IDictionary<string, SpritePickable> newInventory)
         {
             inventory = newInventory;
         }

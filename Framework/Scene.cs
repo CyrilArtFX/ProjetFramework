@@ -26,8 +26,8 @@ namespace Framework
         private bool mouseLeftPress = false;
 
         public IDictionary<string, SpritePickable> inventory = new Dictionary<string, SpritePickable>();
-        private Action<IDictionary<string, SpritePickable>> ChangeInventory;
-        private Action<string> RemoveFromInventories;
+        private Action<IDictionary<string, SpritePickable>> ChangeMainInventory;
+        private Action<string> RemoveFromUIInventories;
 
         private List<Message> messages = new List<Message>();
         private List<SpriteStateful> observers = new List<SpriteStateful>();
@@ -35,15 +35,15 @@ namespace Framework
         private string[] datas;
 
 
-        public Scene(GraphicsDevice graphicsDevice, string datasFilePath, IDictionary<string, SpritePickable> inventory, Action<IDictionary<string, SpritePickable>> ChangeInventory, Action<string> RemoveFromInventories)
+        public Scene(GraphicsDevice graphicsDevice, string datasFilePath, IDictionary<string, SpritePickable> inventory, Action<IDictionary<string, SpritePickable>> ChangeMainInventory, Action<string> RemoveFromUIInventories)
         {
             screenSizeX = graphicsDevice.Viewport.Width;
             screenSizeY = graphicsDevice.Viewport.Height;
             this.graphicsDevice = graphicsDevice;
 
             this.inventory = inventory;
-            this.ChangeInventory = ChangeInventory;
-            this.RemoveFromInventories = RemoveFromInventories;
+            this.ChangeMainInventory = ChangeMainInventory;
+            this.RemoveFromUIInventories = RemoveFromUIInventories;
             ui = new UI_Group();
 
             datas = File.ReadAllLines(datasFilePath);
@@ -121,29 +121,34 @@ namespace Framework
         {
             pickables.Remove(pickableName);
             inventory.Add(pickableName, pickable);
-            UpdateInventoryUI();
+            UpdateUIInventory();
         }
 
         public void RemoveFromInventory(string pickableName)
         {
-            RemoveFromInventories(pickableName);
+            string pickableButtonName = pickableName + "Button";
+            RemoveFromUIInventories(pickableButtonName);
             inventory.Remove(pickableName);
-            UpdateInventoryUI();
+            UpdateUIInventory();
         }
 
-        public void UpdateInventoryUI()
+        public void UpdateUIInventory()
         {
             foreach (var element in inventory)
-                ui.RemoveElement(element.Key + "Button");
+            {
+                string elementButtonName = element.Key + "Button";
+                ui.RemoveElement(elementButtonName);
+            }
             int i = 0;
             foreach (var element in inventory)
             {
+                string elementButtonName = element.Key + "Button";
                 List<Message> messagesToSend = element.Value.messagesToSendWhenInInventory;
                 messagesToSend.Add(new Message(Message.MessageType.inventoryElementClicked, element.Key));
-                ui.AddElement(element.Key + "Button", new UI_Button(new Vector2((i * 95) + 10, 10), new Vector2(90, 90), element.Value.texture, element.Value.texture, element.Value.texture, SendMessage, messagesToSend));
+                ui.AddElement(elementButtonName, new UI_Button(new Vector2((i * 95) + 10, 10), new Vector2(90, 90), element.Value.texture, element.Value.texture, element.Value.texture, SendMessage, messagesToSend));
                 i++;
             }
-            ChangeInventory(inventory);
+            ChangeMainInventory(inventory);
         }
 
         public void InitializeDatas(Func<string, Texture2D> GetContent, IDictionary<string, Scene> listOfScenes)

@@ -1,3 +1,17 @@
+IMPORTANT THINGS TO KNOW
+pathToTexture2Dfile start in "Content" folder
+isCentered is a boolean, write true or false
+enter a existing scene name (create it in Main) for SceneToGo
+messageType is an enum (there is actually changeState, noType, inventoryElementClicked (do not use it, it's for an internal use for the inventory))
+messageContent is a string
+state is a string
+if you want to resize the ColliderBox, write ColliderBox in the line (not true or something else)
+
+If you initialize datas uncorrectly, the game will not work
+
+Here are how to initialize each datas :
+
+
 -> Set the background :
 background;pathToTheTexture2Dfile
 
@@ -8,14 +22,33 @@ ground;pathToTheTexture2Dfile
 player;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;speed
 OR
 player;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY;speed
->Use the ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY; version if you want to resize the colliderBox of the sprite (the default size is the size of the sprite)
+>Use the ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY; version if you want to resize the colliderBox of the sprite (the default size is the size of the sprite).
 
 -> Set a sprite :
-sprite;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered
+sprite;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;name
 OR
-sprite;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY
+sprite;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY;name
 
 -> Set a warp:
-warp;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered
+warp;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;sceneToGo;posXToTeleportPlayer;name
 OR
-warp;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY
+warp;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY;sceneToGo;posXToTeleportPlayer;name
+
+-> Set a panel:
+panel;posX;posY;sizeX;sizeY;name
+
+-> Set a button:
+button;posX;posY;sizeX;sizeY;name;pathToTheIdleTexture2Dfile;pathToTheHoveredTexture2Dfile;pathToTheClickedTexture2Dfile;numberOfMessagesToSendWhenClick;messageType1;messageContent1;messageType2;messageContent2...
+>At the end of the line, write as many Types and Content datas as number of messages you want to send (a message is defined by his type and his content).
+
+-> Set a spriteStateful:
+spriteStateful;posX;posY;sizeX;sizeY;isCentered;numberOfStates;pathToTheState1Texture2D;pathToTheState2Texture2D...;state1;state2...;baseState;name
+OR
+spriteStateful;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY;numberOfStates;pathToTheState1Texture2D;pathToTheState2Texture2D...;state1;state2...;baseState;name
+> Write as many pathToTexture2Dfile and state datas as number of states you want this sprite to have.
+
+-> Set a spritePickable:
+spritePickable;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;name;numberOfMessagesToSendWhenClickInInventory;messageType1;messageContent1;messageType2;messageContent2...
+OR
+spritePickable;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;ColliderBox;CBoffsetX;CBoffsetY;CBsizeX;CBsizeY;name;numberOfMessagesToSendWhenClickInInventory;messageType1;messageContent1;messageType2;messageContent2...
+>At the end of the line, write as many Types and Content datas as number of messages you want to send when the sprite is in the inventory (a message is defined by his type and his content).
