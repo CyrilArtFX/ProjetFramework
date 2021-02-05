@@ -1,9 +1,9 @@
 background;Sprites/ScenesImages/background
 ground;Sprites/ScenesImages/ground
-player;Sprites/OtherSprites/player;300;405;64;64;true;ColliderBox;20;15;23;47;5
-sprite;Sprites/OtherSprites/friend;400;405;64;64;true;ColliderBox;21;15;23;47;coupaing
-warp;Sprites/OtherSprites/warp;550;405;100;100;true;level01;500;warpToLevel01
+player;Sprites/OtherSprites/player;300;425;64;64;true;ColliderBox;20;15;23;47;5;noAnim
+sprite;Sprites/OtherSprites/friend;400;425;64;64;true;ColliderBox;21;15;23;47;coupaing;noAnim
+warp;Sprites/OtherSprites/warp;550;425;100;100;true;level01;500;warpToLevel01;Sprites/Animations/warp;320;9;60
 button;25;200;50;50;testButton;Sprites/UI/buttonIdle;Sprites/UI/buttonHover;Sprites/UI/buttonClicked;1;changeState;pause
-spriteStateful;600;300;50;50;true;2;Sprites/States/base;Sprites/States/pause;base;pause;base;stateSprite
-spritePickable;Sprites/Pickables/heart;100;405;30;30;true;ColliderBox;5;6;20;18;heart;1;noType;null
-spritePickable;Sprites/Pickables/heart;200;405;30;30;true;ColliderBox;5;6;20;18;anotherHeart;1;noType;null
+spriteStateful;600;300;50;50;true;2;Sprites/States/base;Sprites/States/pause;base;pause;base;stateSprite;noAnim
+spritePickable;Sprites/Pickables/heart;100;425;30;30;true;ColliderBox;5;6;20;18;heart;1;noType;null;noAnim
+spritePickable;Sprites/Pickables/heart;200;425;30;30;true;ColliderBox;5;6;20;18;anotherHeart;1;noType;null;noAnim

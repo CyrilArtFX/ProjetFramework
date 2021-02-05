@@ -54,3 +54,13 @@ C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1
 C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\States\base.xnb
 C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\States\pause.xnb
 C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Pickables\heart.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\Portal\0.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\Portal\1.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\Portal\2.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\Portal\3.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\Portal\4.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\Portal\5.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\Portal\6.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\Portal\7.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\Portal\8.xnb
+C:\Users\cyril\OneDrive\Bureau\ProjetFramework\Framework\bin\Debug\netcoreapp3.1\Content\Sprites\Animations\warp.xnb

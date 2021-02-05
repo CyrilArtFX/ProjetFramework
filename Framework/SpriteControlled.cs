@@ -9,13 +9,13 @@ namespace Framework
         private float goalPositionX;
         public bool isMoving;
 
-        public SpriteControlled(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Rectangle colliderBoxAdjustments, float baseSpeed) : base(baseTexture, basePosition, baseSize, isCentered, colliderBoxAdjustments)
+        public SpriteControlled(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Rectangle colliderBoxAdjustments, float baseSpeed, Animation anim) : base(baseTexture, basePosition, baseSize, isCentered, colliderBoxAdjustments, anim)
         {
             isMoving = false;
             speed = baseSpeed;
         }
 
-        public SpriteControlled(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, float baseSpeed) : base(baseTexture, basePosition, baseSize, isCentered)
+        public SpriteControlled(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, float baseSpeed, Animation anim) : base(baseTexture, basePosition, baseSize, isCentered, anim)
         {
             isMoving = false;
             speed = baseSpeed;
@@ -27,8 +27,9 @@ namespace Framework
             isMoving = true;
         }
 
-        public void Update()
+        public override void Update()
         {
+            base.Update();
             if (isMoving)
             {
                 if (goalPositionX > position.X)

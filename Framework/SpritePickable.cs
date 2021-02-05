@@ -10,14 +10,19 @@ namespace Framework
     {
         public List<Message> messagesToSendWhenInInventory = new List<Message>();
 
-        public SpritePickable(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Rectangle colliderBoxAdjustments, List<Message> messagesToSendWhenInInventory) : base(baseTexture, basePosition, baseSize, isCentered, colliderBoxAdjustments)
+        public SpritePickable(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Rectangle colliderBoxAdjustments, List<Message> messagesToSendWhenInInventory, Animation anim) : base(baseTexture, basePosition, baseSize, isCentered, colliderBoxAdjustments, anim)
         {
             this.messagesToSendWhenInInventory = messagesToSendWhenInInventory;
         }
 
-        public SpritePickable(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, List<Message> messagesToSendWhenInInventory) : base(baseTexture, basePosition, baseSize, isCentered)
+        public SpritePickable(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, List<Message> messagesToSendWhenInInventory, Animation anim) : base(baseTexture, basePosition, baseSize, isCentered, anim)
         {
             this.messagesToSendWhenInInventory = messagesToSendWhenInInventory;
+        }
+
+        public override void Update()
+        {
+            base.Update();
         }
     }
 }

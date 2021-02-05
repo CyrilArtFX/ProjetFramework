@@ -17,6 +17,7 @@ namespace Framework
         private bool mouseLeftPress = false;
 
         public bool isClick = false;
+        public bool canBeClicked = true;
 
         private Action<Message> sendMessage;
         private List<Message> messagesToSend = new List<Message>();
@@ -38,19 +39,20 @@ namespace Framework
         public override void Update()
         {
             base.Update();
-            if(isHover)
+            if (isHover)
             {
-                if(!isClick && mouseLeftClick)
+                if (!isClick && mouseLeftPress)
                 {
                     isClick = true;
                     events["click"]();
                 }
-                if(isClick && !mouseLeftClick)
+                if (isClick && !mouseLeftPress)
                 {
                     isClick = false;
                     events["release"]();
                 }
             }
+            else isClick = false;
 
             //MousePart
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
@@ -85,14 +87,14 @@ namespace Framework
         public void OnClick()
         {
             currentSprite = spriteClicked;
-            foreach(Message messageToSend in messagesToSend)
-                sendMessage(messageToSend);
         }
 
         public void OnRelease()
         {
             if (isHover) currentSprite = spriteHover;
             else currentSprite = spriteIdle;
+            foreach (Message messageToSend in messagesToSend)
+                sendMessage(messageToSend);
         }
     }
 }

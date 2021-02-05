@@ -15,7 +15,10 @@ namespace Framework
 
         private Rectangle colliderBoxAdjustments;
 
-        public Sprite(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Rectangle colliderBoxAdjustments)
+        private bool hasAnimation = false;
+        private Animation anim;
+
+        public Sprite(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Rectangle colliderBoxAdjustments, Animation anim)
         {
             texture = baseTexture;
             position = basePosition;
@@ -28,9 +31,11 @@ namespace Framework
             }
 
             this.colliderBoxAdjustments = colliderBoxAdjustments;
+            this.anim = anim;
+            if (anim != null) hasAnimation = true;
         }
 
-        public Sprite(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered)
+        public Sprite(Texture2D baseTexture, Vector2 basePosition, Vector2 baseSize, bool isCentered, Animation anim)
         {
             texture = baseTexture;
             position = basePosition;
@@ -43,6 +48,8 @@ namespace Framework
             }
 
             colliderBoxAdjustments = new Rectangle(0, 0, (int)(size.X), (int)(size.Y));
+            this.anim = anim;
+            if (anim != null) hasAnimation = true;
         }
 
 
@@ -56,9 +63,17 @@ namespace Framework
             else return true;
         }
 
+        public virtual void Update()
+        {
+            if (hasAnimation) anim.Update();
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Rectangle((int)(position.X - centerOffsetX), (int)(position.Y - centerOffsetY), (int)(size.X), (int)(size.Y)), Color.White);
+            if(hasAnimation)
+                spriteBatch.Draw(anim.currentSprite, new Rectangle((int)(position.X - centerOffsetX), (int)(position.Y - centerOffsetY), (int)(size.X), (int)(size.Y)), Color.White);
+            else
+                spriteBatch.Draw(texture, new Rectangle((int)(position.X - centerOffsetX), (int)(position.Y - centerOffsetY), (int)(size.X), (int)(size.Y)), Color.White);
         }
     }
 }

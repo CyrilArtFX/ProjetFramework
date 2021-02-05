@@ -18,6 +18,9 @@ background;pathToTheTexture2Dfile
 -> Set the ground :
 ground;pathToTheTexture2Dfile
 
+!!! For all sprites initializations, if you want to add an animation, write ;pathToTexturesFile;spritesSizeX;numberOfSprites;numberOfFramesBySprite at the end of the line. Else, write ;noAnim instead.
+(Sprites are player, sprite, warp, spriteStateful and spritePickable)
+
 -> Set the player :
 player;pathToTheTexture2Dfile;posX;posY;sizeX;sizeY;isCentered;speed
 OR

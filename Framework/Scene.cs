@@ -59,12 +59,24 @@ namespace Framework
             if (ui != null) ui.Update();
 
             foreach (var warp in warps)
+            {
                 if (player.Intersects(warp.Value))
                     ChangeScene(warp.Value.sceneToGo, warp.Value.xPlayerArrive);
+                warp.Value.Update();
+            }
 
             foreach (var pickable in pickables)
+            {
                 if (player.Intersects(pickable.Value))
                     AddToInventory(pickable.Value, pickable.Key);
+                pickable.Value.Update();
+            }
+
+            foreach (var sprite in sprites)
+            {
+                sprite.Value.Update();
+            }
+
 
 
 
@@ -170,25 +182,55 @@ namespace Framework
                 else if (cells[0] == "player")
                 {
                     if (cells[7] == "ColliderBox")
-                        player = new SpriteControlled(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), float.Parse(cells[12]));
+                    {
+                        Animation anim;
+                        if (cells[13] != "noAnim") anim = new Animation(GetContent(cells[13]), int.Parse(cells[14]), int.Parse(cells[15]), int.Parse(cells[16]), graphicsDevice);
+                        else anim = null;
+                        player = new SpriteControlled(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), float.Parse(cells[12]), anim);
+                    }
                     else
-                        player = new SpriteControlled(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), float.Parse(cells[7]));
+                    {
+                        Animation anim;
+                        if (cells[8] != "noAnim") anim = new Animation(GetContent(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11]), graphicsDevice);
+                        else anim = null;
+                        player = new SpriteControlled(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), float.Parse(cells[7]), anim);
+                    }
                 }
 
                 else if (cells[0] == "sprite")
                 {
                     if (cells[7] == "ColliderBox")
-                        sprites.Add(cells[12], new Sprite(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11]))));
+                    {
+                        Animation anim;
+                        if (cells[13] != "noAnim") anim = new Animation(GetContent(cells[13]), int.Parse(cells[14]), int.Parse(cells[15]), int.Parse(cells[16]), graphicsDevice);
+                        else anim = null;
+                        sprites.Add(cells[12], new Sprite(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), anim));
+                    }
                     else
-                        sprites.Add(cells[7], new Sprite(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6])));
+                    {
+                        Animation anim;
+                        if (cells[8] != "noAnim") anim = new Animation(GetContent(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11]), graphicsDevice);
+                        else anim = null;
+                        sprites.Add(cells[7], new Sprite(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), anim));
+                    }
                 }
 
                 else if (cells[0] == "warp")
                 {
                     if (cells[7] == "ColliderBox")
-                        warps.Add(cells[14], new Warp(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), listOfScenes[cells[12]], int.Parse(cells[13])));
+                    {
+                        Animation anim;
+                        if (cells[15] != "noAnim") anim = new Animation(GetContent(cells[15]), int.Parse(cells[16]), int.Parse(cells[17]), int.Parse(cells[18]), graphicsDevice);
+                        else anim = null;
+                        warps.Add(cells[14], new Warp(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), listOfScenes[cells[12]], int.Parse(cells[13]), anim));
+                    }
                     else
-                        warps.Add(cells[9], new Warp(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), listOfScenes[cells[7]], int.Parse(cells[8])));
+                    {
+                        Animation anim;
+                        if (cells[10] != "noAnim") anim = new Animation(GetContent(cells[10]), int.Parse(cells[11]), int.Parse(cells[12]), int.Parse(cells[13]), graphicsDevice);
+                        else anim = null;
+                        warps.Add(cells[9], new Warp(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), listOfScenes[cells[7]], int.Parse(cells[8]), anim));
+                    }
                 }
 
                 else if (cells[0] == "panel")
@@ -217,7 +259,10 @@ namespace Framework
                             textures.Add(GetContent(cells[12 + i]));
                             states.Add(cells[12 + numberOfStates + i], i);
                         }
-                        SpriteStateful spriteStateful = new SpriteStateful(new Vector2(int.Parse(cells[1]), int.Parse(cells[2])), new Vector2(int.Parse(cells[3]), int.Parse(cells[4])), bool.Parse(cells[5]), new Rectangle(int.Parse(cells[7]), int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10])), textures, states, cells[12 + 2 * numberOfStates]);
+                        Animation anim;
+                        if (cells[14 + 2 * numberOfStates] != "noAnim") anim = new Animation(GetContent(cells[14 + 2 * numberOfStates]), int.Parse(cells[15 + 2 * numberOfStates]), int.Parse(cells[16 + 2 * numberOfStates]), int.Parse(cells[17 + 2 * numberOfStates]), graphicsDevice);
+                        else anim = null;
+                        SpriteStateful spriteStateful = new SpriteStateful(new Vector2(int.Parse(cells[1]), int.Parse(cells[2])), new Vector2(int.Parse(cells[3]), int.Parse(cells[4])), bool.Parse(cells[5]), new Rectangle(int.Parse(cells[7]), int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10])), textures, states, cells[12 + 2 * numberOfStates], anim);
                         sprites.Add(cells[13 + 2 * numberOfStates], spriteStateful);
                         observers.Add(spriteStateful);
                     }
@@ -231,7 +276,10 @@ namespace Framework
                             textures.Add(GetContent(cells[7 + i]));
                             states.Add(cells[7 + numberOfStates + i], i);
                         }
-                        SpriteStateful spriteStateful = new SpriteStateful(new Vector2(int.Parse(cells[1]), int.Parse(cells[2])), new Vector2(int.Parse(cells[3]), int.Parse(cells[4])), bool.Parse(cells[5]), textures, states, cells[7 + 2 * numberOfStates]);
+                        Animation anim;
+                        if (cells[9 + 2 * numberOfStates] != "noAnim") anim = new Animation(GetContent(cells[9 + 2 * numberOfStates]), int.Parse(cells[10 + 2 * numberOfStates]), int.Parse(cells[11 + 2 * numberOfStates]), int.Parse(cells[12 + 2 * numberOfStates]), graphicsDevice);
+                        else anim = null;
+                        SpriteStateful spriteStateful = new SpriteStateful(new Vector2(int.Parse(cells[1]), int.Parse(cells[2])), new Vector2(int.Parse(cells[3]), int.Parse(cells[4])), bool.Parse(cells[5]), textures, states, cells[7 + 2 * numberOfStates], anim);
                         sprites.Add(cells[8 + 2 * numberOfStates], spriteStateful);
                         observers.Add(spriteStateful);
                     }
@@ -243,9 +291,12 @@ namespace Framework
                     {
                         int numberOfMessages = int.Parse(cells[13]);
                         List<Message> messagesToSentWhenInInventory = new List<Message>();
-                        for(int i = 0; i < numberOfMessages; i++)
+                        for (int i = 0; i < numberOfMessages; i++)
                             messagesToSentWhenInInventory.Add(new Message((Message.MessageType)Enum.Parse(typeof(Message.MessageType), cells[14 + i * 2]), cells[15 + i * 2]));
-                        pickables.Add(cells[12], new SpritePickable(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), messagesToSentWhenInInventory));
+                        Animation anim;
+                        if (cells[14 + 2 * numberOfMessages] != "noAnim") anim = new Animation(GetContent(cells[15 + 2 * numberOfMessages]), int.Parse(cells[16 + 2 * numberOfMessages]), int.Parse(cells[17 + 2 * numberOfMessages]), int.Parse(cells[18 + 2 * numberOfMessages]), graphicsDevice);
+                        else anim = null;
+                        pickables.Add(cells[12], new SpritePickable(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), new Rectangle(int.Parse(cells[8]), int.Parse(cells[9]), int.Parse(cells[10]), int.Parse(cells[11])), messagesToSentWhenInInventory, anim));
                     }
                     else
                     {
@@ -253,7 +304,10 @@ namespace Framework
                         List<Message> messagesToSentWhenInInventory = new List<Message>();
                         for (int i = 0; i < numberOfMessages; i++)
                             messagesToSentWhenInInventory.Add(new Message((Message.MessageType)Enum.Parse(typeof(Message.MessageType), cells[9 + i * 2]), cells[10 + i * 2]));
-                        pickables.Add(cells[7], new SpritePickable(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), messagesToSentWhenInInventory));
+                        Animation anim;
+                        if (cells[9 + 2 * numberOfMessages] != "noAnim") anim = new Animation(GetContent(cells[10 + 2 * numberOfMessages]), int.Parse(cells[11 + 2 * numberOfMessages]), int.Parse(cells[12 + 2 * numberOfMessages]), int.Parse(cells[13 + 2 * numberOfMessages]), graphicsDevice);
+                        else anim = null;
+                        pickables.Add(cells[7], new SpritePickable(GetContent(cells[1]), new Vector2(float.Parse(cells[2]), float.Parse(cells[3])), new Vector2(float.Parse(cells[4]), float.Parse(cells[5])), bool.Parse(cells[6]), messagesToSentWhenInInventory, anim));
                     }
                 }
             }
